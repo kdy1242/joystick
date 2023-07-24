@@ -1,7 +1,11 @@
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+
+import 'game_controller.dart';
 
 class JoystickController extends GetxController {
   // 조이스틱 중심점 위치
@@ -9,9 +13,6 @@ class JoystickController extends GetxController {
 
   // 조이스틱 움직임 위치
   var movement = Offset(0, 0).obs;
-
-  // 조이스틱으로 움직이는 원 위치
-  var circle = Offset(0, 0).obs;
 
   // 배경 원 반지름
   double radius = 50;
@@ -29,6 +30,7 @@ class JoystickController extends GetxController {
       movement.value = movement.value * (radius / distance);
     }
 
-    circle.value += movement.value * 0.1;
+    Get.find<GameController>().circle.value += movement.value * 0.1;
+    log('${Get.find<GameController>().circle.value}');
   }
 }
